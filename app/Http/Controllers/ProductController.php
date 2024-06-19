@@ -7,6 +7,7 @@ use App\Http\Requests\ProductRequest\Update;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -78,6 +79,7 @@ class ProductController extends Controller
      */
     public function update(Update $request, string $id)
     {
+        // dd($request);
         $product = Product::findOrFail($id);
 
         $data = [
@@ -88,14 +90,25 @@ class ProductController extends Controller
 
         if($request->hasFile('image') && $request->file('image')->isValid()){
             $path = "image/";
-            $oldfile = $path.basename($product->image);
-            Storage::disk('public')->delete($oldfile);
-            $data['image'] = Storage::disk('public')->put($path, $request->file('image'));
+            $oldfile = $path . basename($product->image);
+            Log::info("Old file path: " . $oldfile);
+
+            if (Storage::disk('public')->exists($oldfile)) {
+                Log::info("Old file exists, deleting...");
+                Storage::disk('public')->delete($oldfile);
+            }
+
+            $newImagePath = $request->file('image')->store($path, 'public');
+            Log::info("New image path: " . $newImagePath);
+
+            $data['image'] = $newImagePath;
         }
+
         $product->update($data);
 
         return redirect('product')->with('toast', 'showToast("Data berhasil diupdate")');
     }
+
 
     /**
      * Remove the specified resource from storage.

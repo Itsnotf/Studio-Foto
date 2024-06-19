@@ -89,8 +89,8 @@
                         @endif
                         <div class="clearfix"></div>
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="avatar" name="avatar">
-                            <label class="custom-file-label" for="avatar">Choose Avatar</label>
+                            <input type="file" class="custom-file-input" id="image" name="image">
+                            <label class="custom-file-label" for="image">Choose Avatar</label>
                         </div>
                     </div>
                 </div>
