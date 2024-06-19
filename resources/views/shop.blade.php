@@ -72,7 +72,7 @@
                                 const paketDiv = `
                                 <div class="paket h-80 w-60 transition-all hover:scale-105 shadow-md rounded-lg">
                                     <div class="h-[60%] border">
-                                        <img src="${paket.image}" alt="${paket.title}" class="object-cover w-full h-full">
+                                        <img src="/storage/${paket.image}" alt="${paket.title}" class="object-cover w-full h-full">
                                     </div>
                                     <div class="px-3">
                                         <div class="mb-5 h-14 overflow-hidden">
@@ -90,8 +90,7 @@
                                     </div>
                                 </div>
                             `;
-                                paketContainer.insertAdjacentHTML('beforeend',
-                                    paketDiv);
+                                paketContainer.insertAdjacentHTML('beforeend', paketDiv);
                             });
                         })
                         .catch(error => console.error('Error fetching pakets:', error));
@@ -99,4 +98,5 @@
             });
         });
     </script>
+
 @endsection

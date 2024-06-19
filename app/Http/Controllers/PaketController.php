@@ -67,13 +67,11 @@ class PaketController extends Controller
      */
     public function edit(string $id)
     {
-        $products = Product::get();
         $item = Paket::findOrFail($id);
+        $products = Product::get();
 
-        return view('pages.paket.edit',[
-            'item'  =>  $item,
-            'products'  =>  $products
-        ]);
+
+        return view('pages.paket.edit',compact('item','products'));
     }
 
     /**

@@ -24,14 +24,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [ClientController::class, 'home'])->name('home');
 Route::get('/shop', [ClientController::class, 'shop'])->name('shop');
 Route::get('/pakets/{product}', [ClientController::class, 'getByProduct']);
-Route::get('/paket/{productid}/{paketId}', [ClientController::class, 'detailProduct'])->name('detail');
+Route::get('/paketz/{productid}/{paketId}', [ClientController::class, 'detailProduct'])->name('detail');
 
 Route::middleware(['auth', 'verified'])->group(function() {
     Route::middleware(['can:admin'])->group(function() {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/profile', [DashboardController::class, 'profile'])->name('profile');
-    Route::put('/change-profile-avatar', [DashboardController::class, 'changeAvatar'])->name('change-profile-avatar');
-    Route::delete('/remove-profile-avatar', [DashboardController::class, 'removeAvatar'])->name('remove-profile-avatar');
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/profile', [DashboardController::class, 'profile'])->name('profile');
+        Route::put('/change-profile-avatar', [DashboardController::class, 'changeAvatar'])->name('change-profile-avatar');
+        Route::delete('/remove-profile-avatar', [DashboardController::class, 'removeAvatar'])->name('remove-profile-avatar');
 
         Route::resource('user', UserController::class);
         Route::resource('product', ProductController::class);
